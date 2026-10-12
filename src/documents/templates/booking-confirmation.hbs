@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{{doc.title}} {{doc.number}}</title>
+  {{> styles}}
+  <style>
+    /* Compact spacing so the confirmation always fits on one A4 page. */
+    .content { padding-top: 7mm; }
+    .slot { display: flex; gap: 5mm; margin-top: 1mm; }
+    .slot .card { flex: 1; text-align: center; padding: 4mm 3mm; }
+    .slot .value { font-size: 21pt; line-height: 1.05; margin-top: 0.5mm; }
+    .slot .sub { font-size: 9pt; color: #6b7385; margin-top: 0.5mm; }
+    .ref { margin-top: 5mm; border: 1.5px dashed #097e52; background: #e8f5ef; border-radius: 4mm; text-align: center; padding: 3mm; }
+    .ref .display { font-size: 26pt; line-height: 1; margin-top: 1mm; letter-spacing: 0.08em; }
+    table.items { margin-top: 5mm; }
+    table.items td { padding: 2.6mm 0; }
+    .totals { margin-top: 3mm; }
+    .checklist { margin-top: 1.5mm; padding-left: 5mm; line-height: 1.55; }
+    .band { padding-top: 11mm; padding-bottom: 9mm; }
+    .footer { margin-top: 5mm; padding-top: 5mm; padding-bottom: 7mm; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    {{> header}}
+
+    <main class="content">
+      <div class="grid-2">
+        <div class="block">
+          <div class="label">Booked for</div>
+          <p class="strong">{{customer.name}}</p>
+          {{#if customer.phone}}<p class="muted">{{customer.phone}}</p>{{/if}}
+          {{#if customer.email}}<p class="muted">{{customer.email}}</p>{{/if}}
+        </div>
+        <div class="block right">
+          <div class="label">Booked on</div>
+          <p class="strong">{{booking.bookedAt}}</p>
+          <p class="muted">via {{booking.source}}</p>
+        </div>
+      </div>
+
+      <div class="label" style="margin-top: 6mm">Your slot</div>
+      <div class="slot">
+        <div class="card">
+          <div class="label">Date</div>
+          <div class="value display">{{booking.dateShort}}</div>
+          <div class="sub">{{booking.weekday}}</div>
+        </div>
+        <div class="card">
+          <div class="label">Time</div>
+          <div class="value display">{{booking.timeIn}}</div>
+          <div class="sub">until {{booking.timeOut}}</div>
+        </div>
+        <div class="card">
+          <div class="label">Duration</div>
+          <div class="value display">{{booking.hours}}</div>
+          <div class="sub">{{booking.players}}</div>
+        </div>
+      </div>
+
+      <div class="ref">
+        <div class="label turf">Booking reference</div>
+        <div class="display">{{booking.code}}</div>
+        <div class="muted" style="margin-top: 2mm">Show this at the desk when you arrive.</div>
+      </div>
+
+      <table class="items">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th class="right">Qty</th>
+            <th class="right">Rate</th>
+            <th class="right">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each lines}}
+          <tr>
+            <td>
+              <div>{{description}}</div>
+              {{#if detail}}<div class="desc-detail">{{detail}}</div>{{/if}}
+            </td>
+            <td class="right num">{{qty}}</td>
+            <td class="right num">{{rate}}</td>
+            <td class="right num">{{amount}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <div class="totals">
+        <div class="row"><span class="muted">Total</span><span class="num">{{totals.total}}</span></div>
+        <div class="row"><span class="muted">Paid so far</span><span class="num">{{totals.paid}}</span></div>
+        <div class="row grand"><span class="strong">{{totals.balanceLabel}}</span><span class="display num">{{totals.balance}}</span></div>
+      </div>
+
+      <div class="card" style="margin-top: 5mm; padding: 4mm 6mm">
+        <div class="label">Good to know</div>
+        <ul class="checklist">
+          <li>Please arrive a few minutes before {{booking.timeIn}} so you get your full slot.</li>
+          <li>{{totals.payNote}}</li>
+          <li>Need to change or cancel? Call {{business.phone}}.</li>
+        </ul>
+      </div>
+    </main>
+
+    {{> footer}}
+  </div>
+</body>
+</html>

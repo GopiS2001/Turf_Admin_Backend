@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{{doc.title}} {{doc.number}}</title>
+  {{> styles}}
+</head>
+<body>
+  <div class="page" style="position: relative">
+    {{> header}}
+
+    <main class="content">
+      <div class="grid-2">
+        <div class="block">
+          <div class="label">Billed to</div>
+          <p class="strong">{{customer.name}}</p>
+          {{#if customer.phone}}<p class="muted">{{customer.phone}}</p>{{/if}}
+          {{#if customer.email}}<p class="muted">{{customer.email}}</p>{{/if}}
+        </div>
+        <div class="block right">
+          <div class="label">Booking</div>
+          <p class="strong">{{booking.code}}</p>
+          <p class="muted">{{booking.date}}</p>
+          <p class="muted">{{booking.time}} · {{booking.hours}}</p>
+        </div>
+      </div>
+
+      <table class="items">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th class="right">Qty</th>
+            <th class="right">Rate</th>
+            <th class="right">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each lines}}
+          <tr>
+            <td>
+              <div>{{description}}</div>
+              {{#if detail}}<div class="desc-detail">{{detail}}</div>{{/if}}
+            </td>
+            <td class="right num">{{qty}}</td>
+            <td class="right num">{{rate}}</td>
+            <td class="right num">{{amount}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <div class="summary">
+        {{#if stamp}}<div class="stamp stamp-{{doc.statusTone}}">{{stamp}}</div>{{/if}}
+        <div class="totals">
+          <div class="row"><span class="muted">Total</span><span class="num">{{totals.total}}</span></div>
+          <div class="row"><span class="muted">Paid</span><span class="num">{{totals.paid}}</span></div>
+          <div class="row grand"><span class="strong">{{totals.balanceLabel}}</span><span class="display num">{{totals.balance}}</span></div>
+        </div>
+      </div>
+
+      {{#if payments.length}}
+      <div class="card card-soft" style="margin-top: 10mm">
+        <div class="label">Payment history</div>
+        <table class="payments">
+          {{#each payments}}
+          <tr>
+            <td style="width: 38%">{{date}}</td>
+            <td>{{kind}} · {{method}}{{#if txn}} <span class="muted">· {{txn}}</span>{{/if}}</td>
+            <td class="right num" style="{{#if isRefund}}color:#6d28d9{{/if}}">{{amount}}</td>
+          </tr>
+          {{/each}}
+        </table>
+      </div>
+      {{/if}}
+    </main>
+
+    {{> footer}}
+  </div>
+</body>
+</html>

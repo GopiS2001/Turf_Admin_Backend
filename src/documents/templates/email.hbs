@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<body style="margin:0;padding:0;background:#f4f5f1;font-family:Segoe UI,Arial,sans-serif;color:#192335;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f5f1;padding:24px 12px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:16px;overflow:hidden;">
+          <tr>
+            <td style="background:#192335;padding:24px 28px;">
+              <div style="font-size:26px;font-weight:700;letter-spacing:2px;color:#ffffff;">{{business.name}}</div>
+              <div style="font-size:13px;color:#ffaa00;margin-top:4px;text-transform:uppercase;letter-spacing:2px;">{{eyebrow}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:28px;">
+              <p style="margin:0 0 12px;font-size:16px;">Hi {{customerName}},</p>
+              <p style="margin:0 0 20px;font-size:15px;line-height:1.6;">{{intro}}</p>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f5f1;border-radius:12px;">
+                {{#each facts}}
+                <tr>
+                  <td style="padding:10px 16px;font-size:14px;color:#6b7385;">{{label}}</td>
+                  <td style="padding:10px 16px;font-size:14px;font-weight:600;text-align:right;">{{value}}</td>
+                </tr>
+                {{/each}}
+              </table>
+              <p style="margin:24px 0 0;">
+                <a href="{{pdfUrl}}" style="display:inline-block;background:#097e52;color:#ffffff;text-decoration:none;font-weight:600;padding:12px 22px;border-radius:10px;">Download {{documentName}} (PDF)</a>
+              </p>
+              <p style="margin:16px 0 0;font-size:13px;color:#6b7385;">The PDF is also attached to this email.</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:18px 28px;border-top:1px solid #e7e9ee;font-size:12px;color:#6b7385;line-height:1.6;">
+              {{business.name}} · {{business.address}}<br />
+              {{business.phone}}{{#if business.email}} · {{business.email}}{{/if}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

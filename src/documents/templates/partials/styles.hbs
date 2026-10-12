@@ -1,0 +1,89 @@
+<style>
+  {{{fontFaces}}}
+
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 210mm; }
+  body {
+    font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+    font-size: 10.5pt;
+    color: #192335;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page { min-height: 297mm; display: flex; flex-direction: column; }
+  .display { font-family: 'Bebas Neue', 'Arial Narrow', sans-serif; letter-spacing: 0.04em; font-weight: 400; }
+  .muted { color: #6b7385; }
+  .accent { color: #ffaa00; }
+  .turf { color: #097e52; }
+  .num { font-variant-numeric: tabular-nums; }
+  .right { text-align: right; }
+
+  /* Header band */
+  .band { background: #192335; color: #fff; padding: 14mm 16mm 12mm; position: relative; overflow: hidden; }
+  .band::after {
+    content: ''; position: absolute; right: -40mm; top: -30mm; width: 90mm; height: 90mm;
+    border-radius: 50%; background: #16a36d; opacity: 0.18;
+  }
+  .band-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 10mm; position: relative; z-index: 1; }
+  .brand { display: flex; gap: 4mm; align-items: center; }
+  .brand svg { width: 15mm; height: 15mm; flex-shrink: 0; }
+  .wordmark { font-size: 26pt; line-height: 1; }
+  .brand-meta { font-size: 8.5pt; color: rgba(255,255,255,0.7); line-height: 1.5; margin-top: 1.5mm; max-width: 80mm; }
+  .doc-title { text-align: right; }
+  .doc-title .display { font-size: 30pt; line-height: 1; }
+  .doc-number { font-size: 12pt; font-weight: 600; margin-top: 1.5mm; }
+  .doc-date { font-size: 9pt; color: rgba(255,255,255,0.7); margin-top: 1mm; }
+
+  .content { padding: 10mm 16mm 0; flex: 1; }
+
+  /* Status pill */
+  .pill { display: inline-block; padding: 1mm 3mm; border-radius: 10mm; font-size: 8.5pt; font-weight: 600; letter-spacing: 0.02em; margin-top: 2.5mm; }
+  .pill-paid { background: #e8f5ef; color: #076a45; }
+  .pill-partial { background: #fff4db; color: #8a5a00; }
+  .pill-unpaid { background: #f1f5f9; color: #475569; }
+  .pill-cancelled { background: #fef2f2; color: #b91c1c; }
+  .pill-refunded { background: #f5f3ff; color: #6d28d9; }
+  .pill-upcoming { background: #f0f9ff; color: #0369a1; }
+  .pill-ongoing { background: #fff4db; color: #8a5a00; }
+  .pill-completed { background: #e8f5ef; color: #076a45; }
+
+  /* Blocks */
+  .grid-2 { display: flex; gap: 8mm; }
+  .grid-2 > * { flex: 1; }
+  .label { font-size: 8pt; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7385; margin-bottom: 1.5mm; }
+  .strong { font-weight: 600; font-size: 11.5pt; }
+  .block p { line-height: 1.55; }
+
+  .card { border: 1px solid #e7e9ee; border-radius: 4mm; padding: 5mm 6mm; }
+  .card-soft { background: #f6f7f4; border-color: #f6f7f4; }
+
+  table.items { width: 100%; border-collapse: collapse; margin-top: 8mm; }
+  table.items th { font-size: 8pt; text-transform: uppercase; letter-spacing: 0.1em; color: #6b7385; font-weight: 600; text-align: left; padding: 0 0 2.5mm; border-bottom: 1.5px solid #192335; }
+  table.items td { padding: 3.5mm 0; border-bottom: 1px solid #e7e9ee; vertical-align: top; }
+  table.items .desc-detail { font-size: 9pt; color: #6b7385; margin-top: 0.8mm; }
+  table.items th.right, table.items td.right { text-align: right; }
+
+  .totals { margin-left: auto; width: 78mm; margin-top: 6mm; }
+  .totals .row { display: flex; justify-content: space-between; padding: 1.4mm 0; }
+  .totals .grand { border-top: 1.5px solid #192335; margin-top: 2mm; padding-top: 3mm; align-items: baseline; }
+  .totals .grand .display { font-size: 22pt; }
+
+  table.payments { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  table.payments td { padding: 2.2mm 0; border-bottom: 1px solid #e7e9ee; }
+  table.payments tr:last-child td { border-bottom: 0; }
+
+  /* Totals with an optional rubber stamp in the free space to their left */
+  .summary { display: flex; align-items: center; justify-content: space-between; gap: 8mm; }
+  .summary .totals { margin-left: auto; }
+  .stamp {
+    transform: rotate(-12deg); margin-left: 12mm;
+    border: 3px solid #097e52; color: #097e52; border-radius: 3mm; padding: 1.5mm 7mm;
+    font-family: 'Bebas Neue', sans-serif; font-size: 34pt; line-height: 1.1; letter-spacing: 0.1em; opacity: 0.85;
+  }
+  .stamp-refunded { border-color: #6d28d9; color: #6d28d9; }
+  .stamp-cancelled { border-color: #b91c1c; color: #b91c1c; }
+
+  .footer { padding: 8mm 16mm 10mm; margin-top: 10mm; border-top: 1px solid #e7e9ee; display: flex; justify-content: space-between; gap: 8mm; font-size: 8.5pt; color: #6b7385; }
+  .footer .thanks { font-size: 11pt; color: #192335; font-weight: 600; }
+</style>

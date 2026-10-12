@@ -1,0 +1,21 @@
+# compiled output
+/dist
+/node_modules
+/coverage
+
+# environment — contains database credentials
+.env
+.env.*
+!.env.example
+
+# user uploads
+/uploads/*
+!/uploads/.gitkeep
+
+# logs / OS / IDE
+*.log
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json
+*.tsbuildinfo
