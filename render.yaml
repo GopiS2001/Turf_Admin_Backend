@@ -1,0 +1,59 @@
+# Render Blueprint: Dashboard → New → Blueprint → pick this repo.
+# Values marked `sync: false` are asked for once when the Blueprint is created.
+services:
+  - type: web
+    name: nineties-turf-api
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    healthCheckPath: /api/public/services
+    envVars:
+      - key: TZ
+        value: Asia/Kolkata
+      - key: TRUST_PROXY
+        value: "1"
+      - key: CORS_ORIGINS
+        value: https://90sturf.vercel.app,https://90sturf-admin.vercel.app
+      - key: PUBLIC_BASE_URL
+        value: https://nineties-turf-api.onrender.com
+
+      # MySQL (Aiven): copy from the service's Overview page
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        value: defaultdb
+      - key: DB_SSL_CA
+        sync: false
+      # No migrations yet: TypeORM creates/updates tables from the entities.
+      - key: DB_SYNC
+        value: "true"
+
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: JWT_ACCESS_EXPIRES_IN
+        value: 15m
+      - key: JWT_REFRESH_EXPIRES_IN
+        value: 7d
+      # The admin panel (vercel.app) and API (onrender.com) are on different sites.
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: COOKIE_SAMESITE
+        value: none
+
+      - key: BUSINESS_NAME
+        value: 90s Turf
+      - key: BUSINESS_ADDRESS
+        value: Mannarpalayam Main Road, Mannarpalayam Pirivu, Salem, Tamil Nadu 636017
+      - key: BUSINESS_PHONE
+        value: +91 98765 43210
+      - key: BUSINESS_EMAIL
+        value: hello@90sturf.in
