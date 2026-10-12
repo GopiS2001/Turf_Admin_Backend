@@ -49,6 +49,10 @@ services:
       - key: COOKIE_SAMESITE
         value: none
 
+      # Turn on after adding SMTP_* (and optionally WHATSAPP_*) settings.
+      - key: AUTO_SEND_DOCUMENTS
+        value: "false"
+
       - key: BUSINESS_NAME
         value: 90s Turf
       - key: BUSINESS_ADDRESS
