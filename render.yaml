@@ -18,19 +18,19 @@ services:
       - key: PUBLIC_BASE_URL
         value: https://nineties-turf-api.onrender.com
 
-      # MySQL (Aiven): copy from the service's Overview page
+      # MySQL-compatible TiDB Cloud (Serverless); its certificate is publicly trusted.
       - key: DB_HOST
-        sync: false
+        value: gateway01.ap-northeast-1.prod.aws.tidbcloud.com
       - key: DB_PORT
-        sync: false
+        value: "4000"
       - key: DB_USER
         sync: false
       - key: DB_PASSWORD
         sync: false
       - key: DB_NAME
-        value: defaultdb
-      - key: DB_SSL_CA
-        sync: false
+        value: nineties_turf
+      - key: DB_SSL
+        value: "true"
       # No migrations yet: TypeORM creates/updates tables from the entities.
       - key: DB_SYNC
         value: "true"
