@@ -41,6 +41,7 @@ export function databaseConfig(
     username: env('DB_USER'),
     password: env('DB_PASSWORD'),
     database: env('DB_NAME'),
+    ssl: sslConfig(env),
     entities: ENTITIES,
     synchronize: env('DB_SYNC') === 'true',
     charset: 'utf8mb4_unicode_ci',
