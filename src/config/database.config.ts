@@ -21,6 +21,16 @@ export const ENTITIES = [
   Review,
 ];
 
+/**
+ * TLS for hosted MySQL (e.g. Aiven): DB_SSL_CA holds the provider's CA certificate
+ * (PEM, newlines may be written as \n); DB_SSL=true alone uses the system CAs.
+ */
+function sslConfig(env: (key: string) => string | undefined) {
+  const ca = env('DB_SSL_CA')?.replace(/\\n/g, '\n');
+  if (ca) return { ca, rejectUnauthorized: true };
+  return env('DB_SSL') === 'true' ? { rejectUnauthorized: true } : undefined;
+}
+
 export function databaseConfig(
   env: (key: string) => string | undefined,
 ): TypeOrmModuleOptions {
