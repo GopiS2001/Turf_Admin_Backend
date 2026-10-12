@@ -9,7 +9,12 @@ import { AppModule } from './app.module';
 import { configureApp } from './app.setup';
 
 async function bootstrap() {
-  const app = configureApp(await NestFactory.create(AppModule));
+  const app = configureApp(
+    await NestFactory.create<NestExpressApplication>(AppModule),
+  );
+  // Behind a hosting proxy (Railway), read the client IP from X-Forwarded-For so
+  // rate limits apply per visitor instead of to everyone at once.
+  if (process.env.TRUST_PROXY) app.set('trust proxy', Number(process.env.TRUST_PROXY));
 
   const swagger = new DocumentBuilder()
     .setTitle('90s Turf API')
